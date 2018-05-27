@@ -21,7 +21,8 @@ from locations import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('korisnik/', views.KorisnikUOpasnostiList.as_view()),
-    path('korisnik/?P<pk>[0-9]+/', views.KorisnikUOpasnostiDetails.as_view()),
+    path('korisnik/<pk>/', views.KorisnikUOpasnostiDetails.as_view()),
+    path('new/', views.NoviKorisnikUOpasnosti.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

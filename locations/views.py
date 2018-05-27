@@ -8,7 +8,8 @@ from .serializers import KorisnikUOpasnostiSerializer
 from django.http import Http404
 
 
-#Ispisi sve ili stvori novo
+#Ispisi sve ili stvori novo u JSON formatu
+#localhost:8000/korisnik
 class KorisnikUOpasnostiList(APIView):
 
     def get(self, request):
@@ -16,6 +17,11 @@ class KorisnikUOpasnostiList(APIView):
         serializer = KorisnikUOpasnostiSerializer(korisnikUOpasnosti, many=True)
         return Response(serializer.data)
 
+
+#Dodaj novog korisnika u JSON formatu
+#localhost:8000/korisnik/new
+class NoviKorisnikUOpasnosti (APIView):
+    
     def post(self, request):
         serializer = KorisnikUOpasnostiSerializer(data=request.data)
         if serializer.is_valid():
@@ -24,7 +30,8 @@ class KorisnikUOpasnostiList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
+#Dohvaćanje i ažuriranje postojećih korisnika
+#localhost:8000/korisnik/<id>
 class KorisnikUOpasnostiDetails (APIView):
 
     def get_object(self, pk):
